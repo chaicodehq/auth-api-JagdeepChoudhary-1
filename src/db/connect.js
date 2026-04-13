@@ -9,4 +9,14 @@ import mongoose from 'mongoose';
  */
 export async function connectDB(uri) {
   // Your code here
+  // console.log(uri, typeof uri)
+  if (!uri) throw new Error("MongoDB URI is required")
+  try {
+    await mongoose.connect(uri)
+    console.log("DB Connected")
+    return mongoose.connection
+  }
+  catch (e) {
+    throw new Error("Connection Failed")
+  }
 }

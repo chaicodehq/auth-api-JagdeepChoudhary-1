@@ -29,6 +29,9 @@ import jwt from 'jsonwebtoken';
  */
 export function signToken(payload) {
   // Your code here
+  const secret = process.env.JWT_SECRET;
+  const expiresIn = process.env.JWT_EXPIRES_IN || '24h';
+  return jwt.sign(payload, secret, { expiresIn });
 }
 
 /**
@@ -67,4 +70,7 @@ export function signToken(payload) {
  */
 export function verifyToken(token) {
   // Your code here
+  const secret = process.env.JWT_SECRET
+  const decoded = jwt.verify(token, secret)
+  return decoded;
 }
